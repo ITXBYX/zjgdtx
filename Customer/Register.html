@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width" />
+<title>注册</title>
+<link href="https://nwzimg.wezhan.cn/Content/public/css/reset.css?_version=20220606103130" rel="stylesheet" type="text/css"/>
+<link href="https://nwzimg.wezhan.cn/Content/Register/Language/Chinese/reg.css?_version=20210414103601" rel="stylesheet" type="text/css"/>
+<link href="https://nwzimg.wezhan.cn/Content/public/css/slidingvalidation.css?_version=20210414103601" rel="stylesheet" type="text/css"/>
+<script src="https://nwzimg.wezhan.cn/Scripts/JQuery/jquery-1.10.2.min.js?_version=20210414103602" type="text/javascript"></script>
+<script src="https://nwzimg.wezhan.cn/Content/public/plugins/placeholder/jplaceholder.js?_version=20210414103601" type="text/javascript"></script>
+<script src="https://nwzimg.wezhan.cn/Administration/Scripts/admin.validator.min.js?_version=20210414103601" type="text/javascript"></script>
+<script src="https://nwzimg.wezhan.cn/Administration/Content/plugins/validate/jquery.validate.min.js?_version=20220421154553" type="text/javascript"></script>
+<script src="https://nwzimg.wezhan.cn/static/lzhdyz/1.0.0/lzhdyz.js?v=20181115&_version=20210414103602" type="text/javascript"></script>
+<script src="https://nwzimg.wezhan.cn/Scripts/common.min.js?v=20181115&_version=20220805175346" type="text/javascript"></script>
+</head>
+<body style="background:url(../Content/Register/images/bg01.png) repeat-y center top;overflow:hidden;">
+<div class="g-reg">
+<div class="g-regradius">
+<img src="../Content/Register/images/oval01.png" width="80" height="auto" style="left:0; top:30px;">
+<img src="../Content/Register/images/oval02.png" width="100" height="auto" style="right:0; top:30px;">
+<img src="../Content/Register/images/oval02.png" width="60" height="auto" style="right:-20px; top:50px;">
+<img src="../Content/Register/images/oval02.png" width="100" height="auto" style="right:-20px; bottom:-50px;">
+<img src="../Content/Register/images/oval01.png" width="40" height="auto" style="right:220px; bottom:90px;">
+<img src="../Content/Register/images/bg02.png" width="777" height="auto" style="left:50%; margin-left:-524px; bottom:-200px;">
+</div>
+<div class="g-regin g-loginin">
+<div class="m-regbox f-clearfix">
+<div class="m-box-left m-regbox-left">
+<div class="m-pictop"><img src="../Content/Register/images/leftpic03.png" width="66" height="44"></div>
+<div class="m-picbottom"><img src="../Content/Register/images/leftpic01.png" width="78" height="39"></div>
+<div class="m-picmiddle"><img src="../Content/Register/images/desk01.png"></div>
+</div>
+<div class="m-box-right m-regbox-right">
+<form id="registerForm">
+<input name="__RequestVerificationToken" type="hidden" value="vvaqzJDfoYWub833m6E023_Nzbn-RntBa7IzE2KjaNDynQT1q6e0iHdEW7pRSaLYFusAzyU4PkxsVyKWjYCVzPmQWeNxjhImLK6OMurNNSY1" />
+<div class="m-boxr-in">
+<h2 class="m-boxr-title">
+<a href="Login" class="m-title-link">已有账号，去登录</a>
+用户注册
+</h2>
+<div class="m-form form-group">
+<div class="form-input w-placeholder">
+<input class="form-control" type="text" placeholder="邮箱" id="username" autocomplete="off" name="username">
+</div>
+</div>
+<div class="m-form form-group" style="display: none;">
+<div class="form-input w-placeholder">
+<div id="lidingRightCode">
+</div>
+</div>
+</div>
+<div class="m-form m-code form-group">
+<div class="form-input w-placeholder">
+<a class="m-code-link" id="btnSendCaptcha">
+<span class="m-code-before">发送验证码</span>
+<span class="m-code-num">60 秒后重发</span>
+</a>
+<input class="form-control" type="text" placeholder="验证码" id="validCode" autocomplete="off" name="validCode">
+</div>
+</div>
+<div class="m-form form-group">
+<div class="form-input w-placeholder">
+<input class="form-control" type="password" placeholder="密码" id="password" autocomplete="off" name="password">
+</div>
+</div>
+<div class="m-form form-group">
+<div class="form-input w-placeholder">
+<input class="form-control" type="password" placeholder="确认密码" id="confirmPassword" autocomplete="off" name="confirmPassword">
+</div>
+</div>
+<div class="m-form">
+<div class="form-input">
+<a href="javascript:void(0)" class="m-btn m-btn-block m-btn-middle m-jbbtn f-relative" style="z-index:4;" id="btnRegister">立即注册</a>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var Timestamp;
+    function initValidate() {
+        registerFormValidate = $("#registerForm").validate({
+            rules: {
+                username: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    rangelength: [6, 32],
+                    isPassword: true
+                },
+                confirmPassword:
+                {
+                    required: true,
+                    equalTo:"#password"
+                },
+                validCode: {
+                    required: true
+                },
+            },
+            messages: {
+                username: {
+                    required: "请输入账号！",
+                     email: "请输入正确的邮箱！"
+                },
+                password: {
+                    required: "请输入密码！",
+                    rangelength: "密码支持6-32个字符",
+                    isPassword: "密码长度6-32位，同时包含字母、数字"
+                },
+                confirmPassword:{
+                    required: "请输入密码",
+                    equalTo: "两次输入密码不一致！"
+                },
+                validCode: {
+                    required: "请输入验证码"
+                },
+            },
+            submitHandler: function () {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var validCode = $('#validCode').val();
+                var $form = $('#registerForm');
+                $.ajax({
+                    cache: false,
+                    url: '/Customer/AjaxRegister',
+                    type: "post",
+                    data: { email: username, password: password, timestamp: Timestamp, captcha: validCode },
+                    dataType: "json",
+                    beforeSend: function (jqXHR, settings) {
+                        settings.data = settings.data + "&__RequestVerificationToken=" + $('input[name="__RequestVerificationToken"]', $form).val() //$.extend(settings.data, { isAjax: true });
+                        return true;
+                    },
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            window.location.href = '/Customer/Index';
+                        } else {
+                            showCustomerError($("#"+result.target), result.Message);
+                        }
+                    },
+                    error: function () { }
+                });
+            },
+            showErrors: function (map, list) {
+                this.currentElements.parents('.form-group:first').find('.has-error').remove();
+                this.currentElements.parents('.form-group:first').removeClass('has-error');
+                $.each(list, function (index, error) {
+                    var ee = $(error.element);
+                    var eep = ee.parents('.form-group:first');
+                    eep.addClass('has-error');
+                    eep.find('.has-error').remove();
+                    eep.append('<div class="has-error"><i class="icon-warning"><img src="../Content/Register/images/warntip01.png"></i>' + error.message + '</div>');
+                    return false;
+                });
+            }
+        });
+    }
+    function initPage()
+    {
+        JPlaceHolder(placeHolder);
+
+        $('#lidingRightCode').lzhdyz({
+            text: '拖动滑块验证',
+            success: '验证通过'
+        });
+        $('#lidingRightCode').lzhdyz('onPass', function () {
+            clearCustomerError($('#lidingRightCode'));
+        });
+    }
+
+    function initEvent()
+    {
+        $(".g-reg").height($(window).height());
+        $(window).bind("resize", function () {
+            $(".g-reg").height($(window).height());
+        });
+
+        $('#btnRegister').off('click').on('click', submitRegister);
+        $('#btnSendCaptcha').off('click').on('click', sendValidCode);
+    }
+
+    function submitRegister()
+    {
+        $("#registerForm").submit();
+    }
+    function showCustomerError(target, message) {
+        $(".has-error.form-group").removeClass("has-error");
+        $(".has-error").remove();
+        $(target).parents(".form-group").addClass("has-error");
+        var html = '<div class="has-error"><i class="icon-warning"><img src="../Content/Register/images/warntip01.png"></i>' + message + '</div>';
+        $(target).parents(".form-group").append(html);
+    }
+    function clearCustomerError(target)
+    {
+        $(".has-error.form-group").removeClass("has-error");
+        $(".has-error").remove();
+    }
+
+    function placeHolder() {
+        var placeHeight = $(".g-regin .m-form .form-input.w-placeholder .placeholder-text .placeholder-text-in").height();
+        $(".g-regin .m-form .form-input.w-placeholder .placeholder-text .placeholder-text-in").css("lineHeight", placeHeight + "px");
+    }
+
+    function sendValidCode() {
+
+        if ($("#btnSendCaptcha").hasClass("m-code-disabled")) {
+            return false;
+        }
+
+        var username = $('#username').val();
+        
+        if (!registerFormValidate.element($("#username")))
+        {
+            return false;
+        }
+        
+        if (!$("#lidingRightCode").is(":visible")) {
+            if (!showSlidingCode("register", "lidingRightCode")) {
+                return false;
+            }
+        }
+        else {
+            if (!$("#lidingRightCode .lz-sliding-validation").hasClass("is-ok")) {
+                showCustomerError($('#lidingRightCode'), '请拖动滑块验证');
+                return false;
+            }
+        }
+        $("#btnSendCaptcha").addClass("m-code-disabled");
+        Timestamp = Date.parse(new Date());
+        var $form = $('#registerForm');
+        $.ajax({
+            cache: false,
+            url: "/Customer/MemberRegisterSendCaptcha",
+            type: "post",
+            data: { userName: username, timestamp: Timestamp },
+            dataType: "json",
+            beforeSend: function (jqXHR, settings) {
+                settings.data = settings.data + "&__RequestVerificationToken=" + $('input[name="__RequestVerificationToken"]', $form).val() //$.extend(settings.data, { isAjax: true });
+                return true;
+            },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    tickSendValidCode(60);
+                }
+                else {
+                    if (result.validate != undefined) {
+                        showCustomerError($('#username'), result.validate);
+                    }
+                    else {
+                        showCustomerError($('#username'), result.Message);
+                    }
+                    $("#btnSendCaptcha").removeClass("m-code-disabled");
+                }
+                setSlidingCodeTime("register", "lidingRightCode");
+            },
+            error: function () { }
+        });
+    }
+    function tickSendValidCode(tick) {
+        var label = '秒后重发';
+        if (tick > 0) {
+            $("#btnSendCaptcha .m-code-num").text((tick - 1) + label);
+            setTimeout(tickSendValidCode, 1000, (tick - 1));
+        }
+        else {
+            $("#btnSendCaptcha").removeClass("m-code-disabled");
+            $("#btnSendCaptcha .m-code-num").text(60 + label);
+        }
+    }
+
+    $(function () {
+        initPage();
+        initEvent();
+        initValidate();
+    });
+</script>
